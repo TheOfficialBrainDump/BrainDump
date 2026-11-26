@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Profile | BrainDump</title>
+
+    <link rel="stylesheet" href="{% static 'accounts/profile.css' %}">
+</head>
+
+<body>
+
+    <main class="profile-container">
+
+        <section class="profile-header">
+
+            <div class="profile-information">
+
+                <h1>Edit Your Profile</h1>
+
+                <p class="profile-username">
+                    Update how people see you on BrainDump.
+                </p>
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="{{ form.display_name.id_for_label }}">
+                            Display Name
+                        </label>
+
+                        {{ form.display_name }}
+
+                        {{ form.display_name.errors }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.bio.id_for_label }}">
+                            Bio
+                        </label>
+
+                        {{ form.bio }}
+
+                        {{ form.bio.errors }}
+                    </div>
+
+                    <button type="submit" class="save-button">
+                        Save Changes
+                    </button>
+
+                </form>
+
+                <p class="back-link">
+                    <a href="{% url 'profile' username=request.user.username %}">
+                        Back to Profile
+                    </a>
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

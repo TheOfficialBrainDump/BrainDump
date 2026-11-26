@@ -1,29 +1,69 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ profile_user.username }} | BrainDump</title>
+    <link rel="stylesheet" href="{% static 'accounts/profile.css' %}">
 </head>
 <body>
-    <main>
-        <section>
-            <h1>
-                {% if profile_user.display_name %}
-                    {{ profile_user.display_name }}
-                {% else %}
-                    {{ profile_user.username }}
-                {% endif %}
-            </h1>
+    <main class="profile-container">
 
-            <p>@{{ profile_user.username }}</p>
+        <section class="profile-header">
 
-            {% if profile_user.bio %}
-                <p>{{ profile_user.bio }}</p>
-            {% else %}
-                <p>This user hasn't written a bio yet.</p>
-            {% endif %}
+            <div class="profile-avatar">
+                <span>
+                    {{ profile_user.username|first|upper }}
+                </span>
+            </div>
+
+            <div class="profile-information">
+                <h1>
+                    {% if profile_user.display_name %}
+                        {{ profile_user.display_name }}
+                    {% else %}
+                        {{ profile_user.username }}
+                    {% endif %}
+                </h1>
+
+                <p class="profile-username">
+                    @{{ profile_user.username }}
+                </p>
+
+                <p class="profile-bio">
+                    {% if profile_user.bio %}
+                        {{ profile_user.bio }}
+                    {% else %}
+                        This user hasn't written a bio yet.
+                    {% endif %}
+                </p>
+                <div class="profile-information">
+    <h1>...</h1>
+
+    <p>...</p>
+
+    {% if user.is_authenticated and user == profile_user %}
+        <a href="{% url 'edit_profile' %}" class="edit-profile-button">
+            Edit Profile
+        </a>
+    {% endif %}
+</div>
+            </div>
+
         </section>
+
+        <nav class="profile-navigation">
+            <a href="#" class="active">Posts</a>
+            <a href="#">Favorites</a>
+            <a href="#">Communities</a>
+        </nav>
+
+        <section class="profile-posts">
+            <h2>Posts</h2>
+            <p class="empty-posts">Nothing here yet.</p>
+        </section>
+
     </main>
 </body>
 </html>
