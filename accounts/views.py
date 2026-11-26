@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from .models import User
 
-# Create your views here.
+
+def profile_view(request, username):
+    profile_user = get_object_or_404(User, username=username)
+
+    return render(request, 'accounts/profile.html', {
+        'profile_user': profile_user,
+    })
+

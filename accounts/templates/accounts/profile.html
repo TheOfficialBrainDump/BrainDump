@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile_user.username }} | BrainDump</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h1>
+                {% if profile_user.display_name %}
+                    {{ profile_user.display_name }}
+                {% else %}
+                    {{ profile_user.username }}
+                {% endif %}
+            </h1>
+
+            <p>@{{ profile_user.username }}</p>
+
+            {% if profile_user.bio %}
+                <p>{{ profile_user.bio }}</p>
+            {% else %}
+                <p>This user hasn't written a bio yet.</p>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
